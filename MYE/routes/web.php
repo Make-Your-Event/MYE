@@ -14,5 +14,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+
+    $nome = "pedro";
+
+    return view('welcome', ['nome'=>$nome, 'i'=>0]);
+});
+
+Route::get('/contact/{id?}', function($id=null){
+
+    $busca = request('search');
+
+
+    return view('contact',['id' => $id, 'busca'=>$busca]);
 });
