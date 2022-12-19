@@ -1,5 +1,177 @@
+:root {
+    --mye-color-1: #F230AE;
+    --mye-color-2: #BD7ED9;
+    --mye-color-3: #9F63F2;
+    --mye-color-4: #F2C166;
+    --mye-color-5: #F27D72;
+}
+
 *{
     font-family: Roboto, sans-serif;
+}
+
+html{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    min-width: 100%;
+    min-height: 100vh;
+    padding-bottom: 100px;
+    position: relative;
+
+}
+
+header{
+
+    background-color: white;
+}
+
+
+
+.row{
+    margin: 0;
+}
+
+.container-fluid{
+    padding: 0;
+}
+
+.btn-primary{
+    background-color: var(--mye-color-3);
+    border: 1px solid var(--mye-color-2);
+}
+.btn-primary:hover{
+    background-color: var(--mye-color-2);
+    border: 1px solid var(--mye-color-2);
+}
+
+/*navbar*/
+
+#navbar{
+    justify-content: space-between;
+}
+#navbar a{
+    border-radius: 10px;
+}
+
+#navbar a:hover{
+    color: var(--mye-color-2);
+    border-radius: 10px;
+    height: 100%;
+}
+
+/*search container*/
+#search-container{
+
+    background-image: url("../img/event_1_large.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 350px;
+    padding: 50px;
+    text-align: center;
+    transition: background .2s ease-in-out;
+
+}
+#search-container:hover{
+    background-image: url("../img/event_1_large_blur.jpg");
+    transition: background .2s ease-in-out;
+    -moz-transition: background .2s ease-in-out;
+    -webkit-transition: background .2s ease-in-out;
+}
+
+@keyframes fadeInBGimg {
+    from {
+        background-image: url("../img/event_1_large.jpg");
+    }
+    to {
+        background-image: url("../img/event_1_large_blur.jpg");
+    }
+}
+
+#search-container h1{
+    color: var(--mye-color-4);
+    margin-bottom: 30px;
+    font-weight: 900;
+}
+
+#search-container form{
+    width: 50%;
+    margin: 0 auto;
+}
+
+#search-container form button{
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+#search-container form input:focus{
+    box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+/*event list*/
+#events-container{
+    padding: 50px;
+}
+#events-container h2{
+    margin-bottom: 10px;
+}
+
+#events-container .subtitle{
+    color: var(--mye-color-3);
+}
+
+#cards-container{
+    display: flex;
+}
+
+#events-container .card{
+    flex: 1 1 0;
+    max-width: 25%;
+    border-radius: 10px;
+    padding: 0;
+    margin: 5px;
+}
+
+#events-container img{
+    max-height: 150px;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.card .card-date{
+    font-size: 10pt;
+}
+
+.card .card-title{
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.card-participants{
+    font-size: 11pt;
+}
+
+/*footer*/
+
+footer{
+    text-align: center;
+    background-color: var(--mye-color-4);
+    color: black;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    margin: 0;
 }
 
 .myelogo{
@@ -8,5 +180,17 @@
     border-radius: 5px 5px 5px;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.22);
     margin-left: 5px;
+}
+
+.padded{
+    padding: 5px;
+}
+
+.marginned{
+    margin: 5px;
+}
+
+.constrained{
+    max-width: 99%;
 }
 
