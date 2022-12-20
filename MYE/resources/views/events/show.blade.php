@@ -20,15 +20,19 @@
                 <p class="event-period">
                     Período📅<br>Início: {{ date('d/m/y - H:i', strtotime($event->inicio)) }}    <br>Fim: {{ date('d/m/y - H:i', strtotime($event->fim)) }}
                 </p>
-                <form action="/events/join/{{$event->id}}" method="POST">
-                    @csrf
-                    <a href="/events/join/{{$event->id}}" class="btn btn-primary" id="event-submit"
-                    onclick="event.preventDefault();
+                @if($userIsParticipant)
+                    <p>Sua participação foi confirmada!</p>
+                @else
+                    <form action="/events/join/{{$event->id}}" method="POST">
+                        @csrf
+                        <a href="/events/join/{{$event->id}}" class="btn btn-primary" id="event-submit"
+                           onclick="event.preventDefault();
                             this.closest('form').submit();
                     "
-                    >Participar</a>
+                        >Participar</a>
+                    </form>
+                @endif
 
-                </form>
             </div>
             <div class="col-md-12" id="description-container">
                 <h3>Descrição</h3>

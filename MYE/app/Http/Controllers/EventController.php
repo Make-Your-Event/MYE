@@ -49,7 +49,18 @@ class EventController extends Controller
     public function show($id){
         $event = Event::findOrFail($id);
         $eventOwner = User::where('id',$event->user_id)->first()->toArray();
-        return view('events.show',['event'=>$event, 'eventOwner' => $eventOwner]);
+
+        $arrayOfParticipants = $event->users()->get();
+        $concatenatedStringOfParticipantsIds = $arrayOfParticipants->implode('id','-');
+        $arrayOfParticipantsIds = explode("-",$concatenatedStringOfParticipantsIds);
+        $user = auth()->user();
+
+        $userIsParticipant = ($user != null && in_array($user->id, $arrayOfParticipantsIds));
+
+        return view('events.show',['event'=>$event,
+            'eventOwner' => $eventOwner,
+            'userIsParticipant' => $userIsParticipant
+        ]);
     }
 
     public function dashboard(){
@@ -86,11 +97,31 @@ class EventController extends Controller
 
     public function joinEvent($id){
         $user = auth()->user();
+        $event = Event::findOrFail($id);
+
+        $arrayOfParticipants = $event->users()->get();
+        $concatenatedStringOfParticipantsIds = $arrayOfParticipants->implode('id','-');
+        $arrayOfParticipantsIds = explode("-",$concatenatedStringOfParticipantsIds);
+
+        $participants = explode("-",$event->users()->get()->implode('id','-'));
+
+        if(in_array($user->id,$arrayOfParticipantsIds)){
+            return redirect('/');
+        }
 
         $user->eventsAsParticipant()->attach($id);
 
-        $event = Event::findOrFail($id);
 
         return redirect('/events/'.$event->id);
+    }
+
+    public function leaveEvent($id){
+        $user = auth()->user();
+
+        $event = Event::findOrFail($id);
+
+        $user->eventsAsParticipant()->detach($id);
+
+        return redirect('/dashboard');
     }
 }

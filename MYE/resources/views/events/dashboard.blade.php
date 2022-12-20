@@ -69,7 +69,11 @@
                         </td>
                         <td>{{count($event->users)}}</td>
                         <td id="form-container">
-                            <a href="">Sair do evento</a>
+                            <form action="/events/leave/{{$event->id}}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger delete-btn">Sair</button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach
