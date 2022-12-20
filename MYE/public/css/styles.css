@@ -337,3 +337,7 @@ footer p {
     background-color: var(--mye-color-4);
     color: #2E3440;
 }
+
+.hidden{
+    display: none;
+}

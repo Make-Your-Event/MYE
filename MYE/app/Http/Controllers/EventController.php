@@ -66,11 +66,17 @@ class EventController extends Controller
     public function dashboard(){
         $user = auth()->user();
 
+        $userName = User::findOrFail($user->getAuthIdentifier());
         $events = $user->events;
 
         $eventsAsParticipant = $user->eventsAsParticipant()->get();
 
-        return view('events.dashboard', ['events' => $events, 'eventsAsParticipant' => $eventsAsParticipant]);
+
+
+        return view('events.dashboard', ['events' => $events,
+            'eventsAsParticipant' => $eventsAsParticipant,
+            'userName'=>$userName->name
+        ]);
     }
 
     public function destroy($id){
