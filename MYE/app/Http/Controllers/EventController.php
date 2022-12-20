@@ -74,7 +74,14 @@ class EventController extends Controller
     }
 
     public function destroy($id){
-        Event::findOrFail($id)->delete();
+        $event = Event::findOrFail($id);
+        $users = $event->users;
+
+        foreach($users as $user){
+            $event->users()->detach($user->id);
+        }
+
+        $event->delete();
         return redirect('/dashboard');
     }
 
