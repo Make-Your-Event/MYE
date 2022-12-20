@@ -50,8 +50,8 @@ class EventController extends Controller
         $event = Event::findOrFail($id);
         $eventOwner = User::where('id',$event->user_id)->first()->toArray();
 
-        $arrayOfParticipants = $event->users()->get();
-        $concatenatedStringOfParticipantsIds = $arrayOfParticipants->implode('id','-');
+        $collectionOfParticipants = $event->users()->get();
+        $concatenatedStringOfParticipantsIds = $collectionOfParticipants->implode('id','-');
         $arrayOfParticipantsIds = explode("-",$concatenatedStringOfParticipantsIds);
         $user = auth()->user();
 
