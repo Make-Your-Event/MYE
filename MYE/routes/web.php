@@ -13,9 +13,16 @@ use App\Http\Controllers\EventController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::post('/events',[EventController::class, 'store']);
+
 
 Route::get('/', [EventController::class, 'index']);
-Route::get('/events/create', [EventController::class, 'createEvent']);
+Route::get('/events/create', [EventController::class, 'createEvent'])->middleware('auth');
+Route::get('/events/{id}', [EventController::class, 'show']);
+Route::delete('/events/{id}', [EventController::class, 'destroy']);
+Route::get('/events/edit/{id}', [EventController::class, 'edit'])->middleware('auth');
+Route::put('/events/update/{id}', [EventController::class, 'update'])->middleware('auth');
+
 
 Route::get('/contact/{id?}', function($id=null){
 
@@ -24,3 +31,7 @@ Route::get('/contact/{id?}', function($id=null){
 
     return view('contact',['id' => $id, 'busca'=>$busca]);
 });
+
+Route::get('/dashboard',[EventController::class, 'dashboard'])->middleware('auth');
+
+
