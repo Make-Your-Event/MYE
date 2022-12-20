@@ -25,7 +25,7 @@
                                     {{$event->nome}}
                                 </a>
                             </td>
-                            <td>0</td>
+                            <td>{{count($event->users)}}</td>
                             <td id="form-container">
                                 <a href="/events/edit/{{$event->id}}" class="btn btn-info edit-btn">Editar</a>
                                 <form action="/events/{{$event->id}}" method="post">
@@ -44,4 +44,39 @@
         @endif
     </div>
 
+    <div class="col-md-10 offset-md-1 dashboard-title-container">
+        <h1>Minhas participações</h1>
+    </div>
+    <div class="col-md-10 offset-md-1 dashboard-events-container">
+        @if(count($eventsAsParticipant) > 0)
+            <table class="table table-dark">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Participantes</th>
+                    <th scope="col">Ações</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($eventsAsParticipant as $event)
+                    <tr>
+                        <td scope="row">{{$loop->index + 1}}</td>
+                        <td>
+                            <a href="/events/{{$event->id}}">
+                                {{$event->nome}}
+                            </a>
+                        </td>
+                        <td>{{count($event->users)}}</td>
+                        <td id="form-container">
+                            <a href="">Sair do evento</a>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        @else
+            <p>Você ainda não confirmou presença em nenhum evento</p>
+        @endif
+    </div>
 @endsection
