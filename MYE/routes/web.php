@@ -35,3 +35,4 @@ Route::get('/contact/{id?}', function($id=null){
 Route::get('/dashboard',[EventController::class, 'dashboard'])->middleware('auth');
 
 
+Route::post('/events/join/{id}',[EventController::class, 'joinEvent'])->middleware('auth');

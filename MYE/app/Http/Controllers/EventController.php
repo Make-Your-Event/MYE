@@ -75,4 +75,14 @@ class EventController extends Controller
         Event::findOrFail($request->id)->update($request->all());
         return redirect('/dashboard');
     }
+
+    public function joinEvent($id){
+        $user = auth()->user();
+
+        $user->eventsAsParticipant()->attach($id);
+
+        $event = Event::findOrFail($id);
+
+        return redirect('/events/'.$event->id);
+    }
 }
