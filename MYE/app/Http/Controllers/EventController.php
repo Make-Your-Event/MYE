@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Ingresso;
 use Illuminate\Http\Request;
 
 use App\Models\Event;
@@ -28,8 +29,9 @@ class EventController extends Controller
     }
 
     public function store(Request $request){
-        $event = new Event;
 
+//      populando evento
+        $event = new Event;
         $event->nome = $request->nome;
         $event->assunto = $request->assunto;
         $event->descricao = $request->descricao;
@@ -39,8 +41,24 @@ class EventController extends Controller
 
         $user = auth()->user();
         $event->user_id = $user->id;
-
+//        salvando usuario
         $event->save();
+
+
+
+//        populando ingresso
+        $ingresso = new Ingresso;
+        $ingresso->titulo = $request->ingressoTitulo;
+        $ingresso->quantidade = $request->ingressoQuantidade;
+        $ingresso->preco = $request->ingressoPreco;
+        $ingresso->descricao = $request->ingressoDescricao;
+        $ingresso->data_inicio_venda = $request->ingressoData_inicio_venda;
+        $ingresso->data_termino_venda = $request->ingressoData_termino_venda;
+        $ingresso->event_id = $event->id;
+
+        $ingresso->save();
+
+
 
         return redirect('/');
 
