@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 :root {
     --mye-color-1: #F230AE;
     --mye-color-2: #BD7ED9;
@@ -287,6 +288,62 @@ header{
     display: inline;
     margin-left: 5%;
 }
+
+/*login card*/
+
+.login-container h1{
+    padding-top: 10px;
+    padding-bottom: 90px;
+    font-size: 50pt;
+}
+
+.login-card{
+    padding: 0 50px 100px 50px;
+    background-image: linear-gradient(to bottom left, rgb(255, 227, 100), rgb(219, 142, 255));
+
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    box-shadow: 2px 2px 4px rgba(74, 85, 104, 0.2);
+}
+
+.login-card .btn{
+    background-color: #2E3440;
+}
+
+.login-card .btn:hover{
+    background-color: var(--mye-color-4);
+}
+.login-card input{
+    border-radius: 10px;
+}
+
+.login-card label{
+    font-size: 12pt;
+}
+
+.login-body{
+    background-color: white;
+    /*background-image: url("../img/gradient.png");*/
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding:10px;
+
+}
+.login-title-container h1{
+    text-align: center;
+    font-family: 'Pacifico', cursive;
+}
+
+.login-container{
+    min-width: 50%;
+}
+
+
 /*footer*/
 
 footer{
@@ -317,6 +374,10 @@ footer p {
 
 .marginned{
     margin: 5px;
+}
+
+.large-marginned{
+    margin:20px;
 }
 
 .constrained{
