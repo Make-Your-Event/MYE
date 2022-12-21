@@ -75,9 +75,13 @@ class EventController extends Controller
 
         $userIsParticipant = ($user != null && in_array($user->id, $arrayOfParticipantsIds));
 
+        $ingresso = Ingresso::where('event_id',$id)->first();
+
         return view('events.show',['event'=>$event,
             'eventOwner' => $eventOwner,
-            'userIsParticipant' => $userIsParticipant
+            'userIsParticipant' => $userIsParticipant,
+            'ingressos_faltando'=>$ingresso->quantidade,
+            'preco_ingresso'=>$ingresso->preco
         ]);
     }
 
@@ -136,12 +140,23 @@ class EventController extends Controller
 
         $participants = explode("-",$event->users()->get()->implode('id','-'));
 
+//        não permite entrar no evento se ja estiver cadastrado
         if(in_array($user->id,$arrayOfParticipantsIds)){
             return redirect('/');
         }
 
         $user->eventsAsParticipant()->attach($id);
 
+
+        $ingresso = Ingresso::where('event_id',$id)->first();
+//        não permite entrar no evento se não houverem ingressos disponiveis
+        if($ingresso->quantidade <= 0){
+            return redirect('/');
+        }
+
+//        decrementando o numero de ingressos disponiveis
+        $ingresso->quantidade -= 1;
+        $ingresso->save();
 
         return redirect('/events/'.$event->id);
     }
@@ -152,6 +167,12 @@ class EventController extends Controller
         $event = Event::findOrFail($id);
 
         $user->eventsAsParticipant()->detach($id);
+
+        //incrementa o numero de ingressos disponiveis
+        $ingresso = Ingresso::where('event_id',$id)->first();
+        $ingresso->quantidade += 1;
+        $ingresso->save();
+
 
         return redirect('/dashboard');
     }

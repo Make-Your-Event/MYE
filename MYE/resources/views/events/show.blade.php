@@ -20,6 +20,12 @@
                 <p class="event-period">
                     Período📅<br>Início: {{ date('d/m/y - H:i', strtotime($event->inicio)) }}    <br>Fim: {{ date('d/m/y - H:i', strtotime($event->fim)) }}
                 </p>
+                <p class="ingresso-disponivel">
+                    Faltam {{$ingressos_faltando}} ingressos!<br>
+                </p>
+                <p>
+                    Preço: {{$preco_ingresso}} R$
+                </p>
                 @if($userIsParticipant)
                     <p>Sua participação foi confirmada!</p>
                 @else
