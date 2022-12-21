@@ -22,4 +22,7 @@ class Event extends Model
     public function ingresso(){
         $this->hasOne('App\Models\Ingresso');
     }
+    public function localidade(){
+        $this->belongsTo('App\Models\Localidade');
+    }
 }

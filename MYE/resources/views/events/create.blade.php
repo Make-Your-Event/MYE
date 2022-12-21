@@ -69,6 +69,23 @@
                 <input type="date" class="form-control" id="ingressoData_termino_venda" name="ingressoData_termino_venda">
             </div>
 
+            {{--Localidade-------------------------------------------------------}}
+            <hr>
+            <h3>Localidade</h3>
+
+            <div class="form-group">
+                <label for="localidadeEndereco">Endereço</label>
+                <input type="text" class="form-control" id="localidadeEndereco" name="localidadeEndereco">
+            </div>
+            <div class="form-group">
+                <label for="localidadeCEP">CEP</label>
+                <input type="text" class="form-control" id="localidadeCEP" name="localidadeCEP">
+            </div>
+            <div class="form-group">
+                <label for="localidadeDescricao">Descrição</label>
+                <textarea type="text" class="form-control" id="localidadeDescricao" name="localidadeDescricao" placeholder="Descrição"></textarea>
+            </div>
+
             <input type="submit" value="Criar" class="btn btn-primary">
         </form>
     </div>

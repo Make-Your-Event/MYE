@@ -40,7 +40,17 @@
                 @endif
 
             </div>
-            <div class="col-md-12" id="description-container">
+            <div class="col-md-6" id="description-container">
+                <h3>Localidade</h3>
+                <p class="event-description">{{$localidade->descricao}}</p>
+                <p>
+                    Endereço: {{$localidade->endereco}}
+                </p>
+                <p>
+                    CEP: {{$localidade->CEP}}
+                </p>
+            </div>
+            <div class="col-md-6" id="description-container">
                 <h3>Descrição</h3>
                 <p class="event-description">{{$event->descricao}}</p>
             </div>

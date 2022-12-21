@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 
 use App\Models\Event;
 use App\Models\User;
+use App\Models\Localidade;
+
+
 class EventController extends Controller
 {
     public function index(){
@@ -30,6 +33,15 @@ class EventController extends Controller
 
     public function store(Request $request){
 
+        //       populando localidade
+        $localidade = new Localidade;
+        $localidade->endereco = $request->localidadeEndereco;
+        $localidade->CEP = $request->localidadeCEP;
+        $localidade->descricao = $request->localidadeDescricao;
+
+        $localidade->save();
+
+
 //      populando evento
         $event = new Event;
         $event->nome = $request->nome;
@@ -41,6 +53,7 @@ class EventController extends Controller
 
         $user = auth()->user();
         $event->user_id = $user->id;
+        $event->localidade_id = $localidade->id;
 //        salvando usuario
         $event->save();
 
@@ -77,11 +90,14 @@ class EventController extends Controller
 
         $ingresso = Ingresso::where('event_id',$id)->first();
 
+        $localidade = Localidade::where('id',$event->localidade_id)->first() ;
+
         return view('events.show',['event'=>$event,
             'eventOwner' => $eventOwner,
             'userIsParticipant' => $userIsParticipant,
             'ingressos_faltando'=>$ingresso->quantidade,
-            'preco_ingresso'=>$ingresso->preco
+            'preco_ingresso'=>$ingresso->preco,
+            'localidade'=>$localidade
         ]);
     }
 
@@ -172,6 +188,7 @@ class EventController extends Controller
         $ingresso = Ingresso::where('event_id',$id)->first();
         $ingresso->quantidade += 1;
         $ingresso->save();
+
 
 
         return redirect('/dashboard');
